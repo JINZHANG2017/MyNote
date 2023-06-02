@@ -24,7 +24,7 @@ class ArticleActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Page()
+            ArticlePage()
 //            Text("hello world");
         }
     }
@@ -33,7 +33,7 @@ class ArticleActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun Page() {
+fun ArticlePage() {
     MyApplicationTheme {
         // A surface container using the 'background' color from the theme
         Surface(

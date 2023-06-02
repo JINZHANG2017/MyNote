@@ -5,15 +5,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.test.fff.ui.theme.MyApplicationTheme
@@ -36,26 +41,36 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-data class Message(val author: String,val body:String)
+data class Message(val author: String, val body: String)
 
 @Composable
-fun MessageCard(msg: Message){
+fun MessageCard(msg: Message) {
     MyApplicationTheme {
         // A surface container using the 'background' color from the theme
         Surface(
-//            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
-            Row(modifier = Modifier.padding(all = 8.dp)) {
-                Image(
-                    painter = painterResource(id = R.drawable.books),
-                    contentDescription = "Books pic.",
-                    modifier = Modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
-                )
+            Row(
+                modifier = Modifier
+                    .padding(all = 8.dp)
+                    .height(60.dp)
+            ) {
+                Column(
+                    modifier = Modifier.height(60.dp),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.books),
+                        contentDescription = "Books pic.",
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clip(CircleShape)
+                            .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
+                    )
+
+                }
                 Spacer(modifier = Modifier.width(8.dp))
-                Column() {
+                Column(modifier = Modifier.height(60.dp).verticalScroll(enabled = true, state = ScrollState(1))) {
                     Text(text = msg.author, style = MyTypography.titleSmall)
                     Text(text = msg.body, style = MyTypography.bodyMedium)
                 }
@@ -68,11 +83,17 @@ fun MessageCard(msg: Message){
 @Preview(
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     showBackground = true,
+    showSystemUi = true,
     name = "Dark Mode"
 )
 @Composable
-fun PreviewMessageCard(){
-    MessageCard(msg = Message("zhangsan", "This is body"))
+fun PreviewMessageCard() {
+    MessageCard(
+        msg = Message(
+            stringResource(R.string.author),
+            "This is bodyThis\n is bodyThis is \nbodyThis is \nbodyThis is bodyThis is bodyThis is bodyThis is bodyThis is body"
+        )
+    )
 }
 
 @Composable

@@ -2,4 +2,6 @@
     <string name="app_name">记事</string>
     <string name="tab1">记事</string>
     <string name="tab2">日历</string>
+    <string name="author">zhangsan</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
