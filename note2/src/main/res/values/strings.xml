@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Note</string>
+    <string name="nav1_label">记事</string>
+    <string name="nav2_label">日历</string>
+</resources>
